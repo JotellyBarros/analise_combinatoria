@@ -25,5 +25,5 @@ combinatoria.o: combinatoria.c
 combinatoria: split.o table.o trim.o combinatoria.o
 	$(CC) $(CFLAGS) split.o table.o trim.o combinatoria.o -o combinatoria
 
-# clean:
-	# rm -f combinatoria*.o *.bak *~ skins/*/*.bak skins/*/*~
+clean:
+	rm -f *.o

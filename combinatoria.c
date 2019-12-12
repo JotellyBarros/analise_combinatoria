@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "split.h"
 #include "table.h"
 #include "trim.h"
@@ -18,11 +17,8 @@ int main(int argc, char *argv[]) {
   char **argsv;
   int argsc;
 
-  if (argc < 2) {
-    fprintf(stderr, "Usage: %s csv_file\n", argv[0]);
-    return (1);
-  }
-
+  if (argc < 2) fprintf(stderr, "./combinatoria file.tipo \";\"\n");
+ 
   /* Saida arquivo. */
   sprintf(buffer, "saida_%s", argv[1]);
   FILE *fp_saida = fopen(buffer, "w+");
@@ -34,7 +30,6 @@ int main(int argc, char *argv[]) {
     while (!feof(fp)) {
       if (fgets(line, sizeof(line), fp)) {
         Trim_Trim(line, line, ";; \t\r\n");
-
         if (strlen(line) > 0) {
           Split_Split(line, ";", &argsc, &argsv);
           if (argsc > 1) {
@@ -51,9 +46,11 @@ int main(int argc, char *argv[]) {
       }
     }
   } else {
-    printf("Arquivo não existe! \n", argsc);
+    printf("Arquivo não existe! \n");
     return 1;
   }
+
+  /* Fechar arquivo. */
   fclose(fp_saida);
   fclose(fp);
   return 0;
